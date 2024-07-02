@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import BotonIcono from "../../BotonIcono";
 import { useContext } from "react";
 import { GlobalContext } from "../../../Context/GlobalContext";
+import useFotoModal from "../../../Hooks/useFotoModal";
 const Figure = styled.figure`
   width: ${(props) => (props.$expandida ? "90%" : "370px")};
   max-width: 100%;
@@ -41,6 +42,7 @@ const Pie = styled.footer`
 
 // eslint-disable-next-line react/prop-types
 const Imagen = ({ foto, expandida = false }) => {
+  const { openModal } = useFotoModal();
   const { dispatch } = useContext(GlobalContext);
 
   // eslint-disable-next-line react/prop-types
@@ -66,7 +68,7 @@ const Imagen = ({ foto, expandida = false }) => {
             <BotonIcono
               aria-hidden={expandida}
               onClick={() => {
-                dispatch({ type: "SET_FOTO_SELECIONADA", payload: foto });
+                openModal(foto);
               }}
             >
               <img src="/iconos/expandir.png" alt="Icono de expandir" />

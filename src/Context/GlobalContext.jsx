@@ -7,6 +7,7 @@ const initialState = {
   filtro: "",
   fotosDeGaleria: [],
   fotoSeleccionada: null,
+  openModal: false,
 };
 
 const reducer = (state, action) => {
@@ -16,7 +17,11 @@ const reducer = (state, action) => {
     case "SET_FOTOS_DE_GALERIA":
       return { ...state, fotosDeGaleria: action.payload };
     case "SET_FOTO_SELECIONADA":
-      return { ...state, fotoSeleccionada: action.payload };
+      return {
+        ...state,
+        fotoSeleccionada: action.payload,
+        openModal: action.payload != null ? true : false,
+      };
     case "ALTERNAR_FAVORITO":
       // eslint-disable-next-line no-case-declarations
       const fotosDeGaleria = state.fotosDeGaleria.map((fotoDeGaleria) => {
