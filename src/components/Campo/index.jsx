@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import search from "./search.png";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { GlobalContext } from "../../Context/GlobalContext";
 
 const InputContainer = styled.div`
   position: relative;
@@ -30,8 +31,9 @@ const IconLupa = styled.img`
   height: 38px;
 `;
 
-const CampoInput = ({ setFiltro }) => {
+const CampoInput = () => {
   const boxFiltro = useRef(null);
+  const { dispatch } = useContext(GlobalContext);
   return (
     <InputContainer>
       <InputStyles
@@ -42,7 +44,12 @@ const CampoInput = ({ setFiltro }) => {
       <IconLupa
         src={search}
         alt="logo-search"
-        onClick={() => setFiltro(boxFiltro.current.value)}
+        onClick={() => {
+          dispatch({
+            type: "SET_FILTRO",
+            payload: boxFiltro.current.value,
+          });
+        }}
       />
     </InputContainer>
   );
